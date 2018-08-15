@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Lyric And Chord</string>
+    <string name="title_activity_list_lyrics">Album</string>
+    <string name="search_title">Search</string>
+    <string name="info_update">Lyrics and Chord Guitar Offline</string>
+</resources>
