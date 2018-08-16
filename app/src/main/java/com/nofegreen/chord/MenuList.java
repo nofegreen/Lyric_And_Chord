@@ -11,10 +11,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class MenuList extends AppCompatActivity {
 
     ListView mylistview;
     Toolbar mToolbar;
+    private AdView mAdViewList;
     //private ArrayList mdata;
     private ArrayAdapter mAdapter;
 
@@ -38,53 +45,6 @@ public class MenuList extends AppCompatActivity {
             com.nofegreen.chord.R.drawable.ic_sentiment_very_dissatisfied_black_24dp
     };
 
-    /*
-    //Album DANGEROUS WOMAN
-    String dangerousWoman[] = {
-            "BAD DECISION",
-            "I DONT CARE",
-            "KNEW BETTER & FOREVER BOY",
-            "LEAVE ME LONELY",
-            "LET ME LOVE YOU",
-            "MOONLIGHT",
-            "SOMETIMES",
-            "THINKING BOUT YOU",
-            "TOUCH IT"
-
-    };
-    Integer[] imageDangerousWoman = {
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen,
-            R.drawable.ic_fullscreen
-    };
-
-    //Album Christmas & Chill
-    String christmas[] = {
-            "Intro",
-            "Wit It This Christmas",
-            "December",
-            "Not Just On Christmas",
-            "True Love",
-            "Winter Things",
-
-    };
-    Integer[] imagechristmas = {
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-            R.drawable.ic_launcher_background,
-    };
-    */
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +55,45 @@ public class MenuList extends AppCompatActivity {
 
         //ThemaList mAdapter = new ThemaList(AlbumTheBest.this, theBest, imageTheBest);
         //mylistview.setAdapter(mAdapter);
+
+        // Sample AdMob app ID: ca-app-pub-3940256099942544/6300978111
+        mAdViewList = findViewById(com.nofegreen.chord.R.id.adViewGrid);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdViewList.loadAd(adRequest);
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+
+        mAdViewList.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

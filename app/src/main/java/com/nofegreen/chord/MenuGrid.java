@@ -18,7 +18,7 @@ public class MenuGrid extends AppCompatActivity {
 
     GridView mygridView;
     android.support.v7.widget.Toolbar gridToolbar;
-    private AdView mAdView;
+    private AdView mAdViewGrid;
 
     String textId[] = {
             "SABYAN"
@@ -47,16 +47,16 @@ public class MenuGrid extends AppCompatActivity {
         gridToolbar.setNavigationIcon(com.nofegreen.chord.R.drawable.ic_arrow_back);
 
         // Sample AdMob app ID: ca-app-pub-3940256099942544/6300978111
-        mAdView = findViewById(com.nofegreen.chord.R.id.adView);
+        mAdViewGrid = findViewById(com.nofegreen.chord.R.id.adViewGrid);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdViewGrid.loadAd(adRequest);
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
 
-        mAdView.setAdListener(new AdListener() {
+        mAdViewGrid.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
